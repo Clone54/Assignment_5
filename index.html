@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issues Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+</head>
+<body class="bg-gray-50 min-h-screen">
+    
+    <!-- login page -->
+     <div id="login-page" class="flex flex-col items-center justify-center min-h-screen px-4">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+            <div class="text-center mb-8">
+                <div class="bg-gray-900 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-brands fa-github text-5xl"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-800">
+                    GitHub Issues Tracker
+                </h1>
+                <p class="text-gray-500">
+                    Sign In to manage your repository issues
+                </p>
+            </div>
+
+            <fieldset id="login-form" class="fieldset bg-white rounded-box p-4">
+
+                <label class="label text-gray-700 block">Username</label>
+                <input type="text" id="username" required class="input outline-none" placeholder="admin" />
+
+                <label class="label text-gray-700 block">Password</label>
+                <input type="password" id="password" required class="input outline-none" placeholder="admin123" />
+
+                <button class="btn text-white  mt-4 bg-blue-600 hover:bg-blue-700 outline-none">Sign In</button>
+            </fieldset>
+
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                <p class="text-sm text-blue-800 font-semibold mb-1">Demo Credentials</p>
+                <p class="text-xs text-blue-600">Username: <span class="font-mono bg-gray-100 px-1 rounded">admin</span></p>
+                <p class="text-xs text-blue-600">Password: <span class="font-mono bg-gray-100 px-1 rounded">admin123</span></p>
+            </div>
+        </div>
+     </div>
+
+    <!-- dashboard page -->
+     <div id="main-page" class="hidden flex flex-col min-h-screen">
+        <nav class="bg-white border-b sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-brands fa-github text-2xl"></i>
+                        <span class="font-bold text-lg hidden sm:block">
+                            GitHub Issues Tracker
+                        </span>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </nav>
+     </div>
+    
+
+    <script src="function.js"></script>
+</body>
+</html>
