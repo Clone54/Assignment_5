@@ -142,11 +142,11 @@ function renderIssues(issues) {
         const borderColor = isClosed ? 'border-purple-500' : 'border-green-500';
         const statusColor = isClosed ? 'text-purple-600 bg-purple-50' : 'text-green-600 bg-green-50';
         
-        const rawId = issue.id || issue._id || '000000';
+        const rawId = issue.id;
         const displayId = String(rawId).slice(-4);
 
         const card = document.createElement('div');
-        card.className = `issue-card bg-white rounded-lg border shadow-sm border-t-4 ${borderColor} p-5 flex flex-col h-full`;
+        card.className = `issue-card bg-white rounded-lg border border-0.2 shadow-sm border-t-5 ${borderColor} p-5 flex flex-col h-full`;
 
         const statusIcon = issue.status === 'closed' ? 'assets/Closed-Status.png' : 'assets/Open-Status.png';
 
@@ -158,11 +158,12 @@ function renderIssues(issues) {
         else if (priority === 'low') pColor = 'bg-[#EEEFF2] text-[#9CA3AF]';
         
         card.innerHTML = `
+        <div  onclick="showIssueDetail('${issue.id}')" class = "cursor-pointer">
             <div class="flex justify-between items-start mb-3">
                 <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${statusColor}"><img src="${statusIcon}" alt="${issue.status || 'Open'}" class="h-4 w-4 inline-block"></span>
                 <span class="px-4 py-1.5 rounded-full font-black text-xs uppercase tracking-wider ${pColor} font-mono">${issue.priority}</span>
             </div>
-            <h3 onclick="showIssueDetail('${rawId}')" class="text-base font-bold text-gray-900 mb-2 cursor-pointer hover:text-blue-600 transition truncate" title="${issue.title || 'No Title'}">
+            <h3 class="text-base font-bold text-gray-900 mb-2 transition truncate" title="${issue.title || 'No Title'}">
                 ${issue.title || 'No Title'}
             </h3>
             <p class="text-sm text-gray-600 mb-4 line-clamp-2 flex-1">
@@ -190,6 +191,7 @@ function renderIssues(issues) {
                     <p class="text-xs font-medium text-gray-700">${issue.createdAt.split('T')[0]}</p>
                 </div>
             </div>
+        </div>
         `;
         grid.appendChild(card);
     });
