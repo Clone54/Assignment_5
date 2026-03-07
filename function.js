@@ -256,17 +256,3 @@ function showLoader(show) {
     const loader = document.getElementById('loader');
     if (loader) loader.classList.toggle('hidden', !show);
 }
-
-function showMessage(title, text, type) {
-    const alertDiv = document.createElement('div');
-    const bgColor = type === 'error' ? 'bg-red-500' : 'bg-green-500';
-    alertDiv.className = `fixed bottom-4 right-4 ${bgColor} text-white px-6 py-4 rounded-lg shadow-xl z-[100] transition-all transform translate-y-0 opacity-100`;
-    alertDiv.innerHTML = `<strong>${title}</strong>: ${text}`;
-    document.body.appendChild(alertDiv);
-    
-    setTimeout(() => {
-        alertDiv.style.opacity = '0';
-        alertDiv.style.transform = 'translateY(20px)';
-        setTimeout(() => alertDiv.remove(), 500);
-    }, 3000);
-}

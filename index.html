@@ -60,9 +60,9 @@
                     </div>
 
                     <div class="flex-1 max-w-md mx-4">
-                        <div class="relative flex items-center">
+                        <div class="relative flex items-center gap-2">
                             <input type="text" id="search-input" class="w-full pl-4 pr-12 py-1 5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none" placeholder="Search Issues Here">
-                            <button id="search-btn" class="btn btn-primary h-3/8"><span class="text-xl">+</span>New Issue</button>
+                            <button id="search-btn" class="btn btn-primary h-1/2"><span class="text-xl">+</span>New Issue</button>
                         </div>
                     </div>
 
@@ -122,7 +122,7 @@
             <div class="p-8">
                 <div class="mb-4">
                     <h2 id="modal-title" class="text-[28px] font-bold text-gray-900 mb-3 tracking-tight"></h2>
-                    <div class="flex items-center gap-2 text-[15px] text-gray-500 font-medium">
+                    <div class="flex items-center gap-2 text-[15px] text-gray-600 font-medium">
                         <span id="modal-status-badge" class="px-3 py-1 rounded-full text-white font-bold text-xs uppercase"></span>
                         <span id="modal-meta-text"></span>
                     </div>
@@ -131,16 +131,16 @@
                 <div class="flex flex-wrap gap-2 mb-6" id="modal-tags"></div>
                 
                 <div class="mb-8">
-                    <p id="modal-desc" class="text-[17px] text-gray-600 leading-[1.6]"></p>
+                    <p id="modal-desc" class="text-[17px] text-gray-900 leading-[1.6]"></p>
                 </div>
         
-                <div class="bg-[#f8f9fc] rounded-xl p-6 grid grid-cols-2 gap-8 border border-gray-100">
+                <div class="bg-[#f8f9fc] rounded-xl p-6 grid grid-cols-2 gap-8 border border-gray-500">
                     <div>
-                        <h4 class="text-gray-400 text-sm font-semibold mb-2">Assignee:</h4>
+                        <h4 class="text-gray-500 text-sm font-semibold mb-2">Assignee:</h4>
                         <p id="modal-author" class="text-gray-800 font-bold text-lg"></p>
                     </div>
                     <div>
-                        <h4 class="text-gray-400 text-sm font-semibold mb-2">Priority:</h4>
+                        <h4 class="text-gray-500 text-sm font-semibold mb-2">Priority:</h4>
                         <span id="modal-priority-badge" class="px-4 py-1.5 rounded-full text-white font-black text-xs uppercase tracking-wider">HIGH</span>
                     </div>
                 </div>
