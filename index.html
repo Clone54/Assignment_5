@@ -28,7 +28,7 @@
                 </p>
             </div>
 
-            <fieldset id="login-form" class="fieldset bg-white rounded-box p-4">
+            <form id="login-form" class="fieldset bg-white rounded-box p-4">
 
                 <label class="label text-gray-700 block">Username</label>
                 <input type="text" id="username" required class="input outline-none" placeholder="admin" />
@@ -36,8 +36,8 @@
                 <label class="label text-gray-700 block">Password</label>
                 <input type="password" id="password" required class="input outline-none" placeholder="admin123" />
 
-                <button class="btn text-white  mt-4 bg-blue-600 hover:bg-blue-700 outline-none">Sign In</button>
-            </fieldset>
+                <button type="submit" class="btn text-white  mt-4 bg-blue-600 hover:bg-blue-700 outline-none">Sign In</button>
+            </form>
 
             <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
                 <p class="text-sm text-blue-800 font-semibold mb-1">Demo Credentials</p>
@@ -48,7 +48,7 @@
      </div>
 
     <!-- dashboard page -->
-     <div id="main-page" class="hidden flex flex-col min-h-screen">
+     <div id="main-page" class=" flex flex-col min-h-screen">
         <nav class="bg-white border-b sticky top-0 z-40">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-16">
@@ -59,11 +59,98 @@
                         </span>
                     </div>
 
-                    
+                    <div class="flex-1 max-w-md mx-4">
+                        <div class="relative flex items-center">
+                            <input type="text" id="search-input" class="w-full pl-4 pr-12 py-1 5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none" placeholder="Search Issues Here">
+                            <button id="search-btn" class="btn btn-primary h-3/8"><span class="text-xl">+</span>New Issue</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </nav>
+
+        <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-8">
+            <div class="mb-8">
+                <div class="flex border-b border-gray-300 mb-6">
+                    <button onclick="filterIssues('all')" id="tab-all" class="btn text-gray-500 hover:text-gray-800 active-tab-all">
+                        All Issues
+                    </button>
+                    <button onclick="filterIssues('open')" id="tab-open" class="btn text-gray-500 hover:text-gray-800 active-tab-open">
+                        Open Issues
+                    </button>
+                    <button onclick="filterIssues('closed')" id="tab-closed" class="btn text-gray-500 hover:text-gray-800 active-tab-closed">
+                        Closed Issues
+                    </button>
+                </div>
+
+                <div class="flex items-center justify-between bg-white p-4 rounded-lg border shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                            <img src="assets/Aperture.png" alt="">
+                        </div>
+                        <div>
+                            <p class="text-lg font-bold text-gray-800" id="issue-count-display">0 Issues</p>
+                            <p class="text-xs text-gray-500">Sorted by newest created</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex items-center gap-1.5 text-sm text-green-600">
+                            <i class="fas fa-check-circle"></i>
+                            <span id="open-count">0</span> Open
+                        </div>
+                        <div class="flex items-center gap-1.5 text-sm text-purple-600">
+                            <i class="fas fa-history"></i>
+                            <span id="closed-count">0</span> Closed
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loader" class="hidden flex justify-center py-20">
+                <div  class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+            </div>
+
+            <div id="issues-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </main>
+        
      </div>
+
+     <div id="issue-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-[2px]" onclick="closeModal()"></div>
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full z-10 overflow-hidden">
+            <div class="p-8">
+                <div class="mb-4">
+                    <h2 id="modal-title" class="text-[28px] font-bold text-gray-900 mb-3 tracking-tight"></h2>
+                    <div class="flex items-center gap-2 text-[15px] text-gray-500 font-medium">
+                        <span id="modal-status-badge" class="px-3 py-1 rounded-full text-white font-bold text-xs uppercase"></span>
+                        <span id="modal-meta-text"></span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2 mb-6" id="modal-tags"></div>
+                
+                <div class="mb-8">
+                    <p id="modal-desc" class="text-[17px] text-gray-600 leading-[1.6]"></p>
+                </div>
+        
+                <div class="bg-[#f8f9fc] rounded-xl p-6 grid grid-cols-2 gap-8 border border-gray-100">
+                    <div>
+                        <h4 class="text-gray-400 text-sm font-semibold mb-2">Assignee:</h4>
+                        <p id="modal-author" class="text-gray-800 font-bold text-lg"></p>
+                    </div>
+                    <div>
+                        <h4 class="text-gray-400 text-sm font-semibold mb-2">Priority:</h4>
+                        <span id="modal-priority-badge" class="px-4 py-1.5 rounded-full text-white font-black text-xs uppercase tracking-wider">HIGH</span>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button onclick="closeModal()" class="px-8 py-3 bg-[#4c1dff] text-white font-bold rounded-lg hover:bg-[#3d16cc] transition-colors shadow-lg">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
 
     <script src="function.js"></script>
