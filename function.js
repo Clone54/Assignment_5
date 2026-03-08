@@ -72,9 +72,7 @@ async function fetchIssues() {
 }
 
 document.getElementById('search-btn').addEventListener('click', performSearch);
-document.getElementById('search-input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') performSearch();
-});
+document.getElementById('search-input').addEventListener('input', performSearch);
 
 async function performSearch() {
     const notifications = document.getElementById('search-input').value.trim();
