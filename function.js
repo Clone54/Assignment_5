@@ -2,7 +2,7 @@ let allIssues = [];
 let filteredIssues = [];
 let currentFilter = 'all';
 
-const API_URL = 'https://phi-lab-server.vercel.app/api/v1/lab';
+const URL = 'https://phi-lab-server.vercel.app/api/v1/lab';
 
 const labelStyles = {
     'bug': {
@@ -57,7 +57,7 @@ async function fetchIssues() {
     showLoader(true);
 
     try {
-        const response = await fetch(`${API_URL}/issues`);
+        const response = await fetch(`${URL}/issues`);
         const data = await response.json();
         allIssues = data.data || data || []; 
         
@@ -88,7 +88,7 @@ async function performSearch() {
     showLoader(true);
 
     try {
-        const response = await fetch(`${API_URL}/issues/search?q=${notifications}`);
+        const response = await fetch(`${URL}/issues/search?q=${notifications}`);
         const data = await response.json();
         filteredIssues = data.data || data || [];
         renderIssues(filteredIssues);
@@ -123,6 +123,7 @@ function filterIssues(status) {
     renderIssues(filteredIssues);
 }
 
+//count format er jonno dilam hudai
 function updateCount(count) {
     document.getElementById('issue-count-display').innerText = `${count} Issue${count !== 1 ? 's' : ''}`;
 }
@@ -201,7 +202,7 @@ async function showIssueDetail(id) {
     showLoader(true); 
     
     try {
-        const response = await fetch(`${API_URL}/issue/${id}`);
+        const response = await fetch(`${URL}/issue/${id}`);
         const data = await response.json();
         const issue = data.data || data;
 
