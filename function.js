@@ -213,7 +213,7 @@ async function showIssueDetail(id) {
         document.getElementById('modal-author').innerText = issue.author || 'Unknown';
         
         const dateStr = issue.createdAt ? new Date(issue.createdAt).toLocaleDateString('en-GB') : 'Unknown Date';
-        document.getElementById('modal-meta-text').innerText = `Opened by ${issue.author || 'Admin'} • ${dateStr}`;
+        document.getElementById('modal-meta-text').innerText = `Opened by ${issue.author || 'Admin'} ❯ ${dateStr}`;
 
         const statusBadge = document.getElementById('modal-status-badge');
         const status = (issue.status).toLowerCase();
@@ -246,6 +246,9 @@ async function showIssueDetail(id) {
                         `;
                     }).join('')}
         `;
+
+        const problemId = document.getElementById('problem-id');
+        problemId.innerText = `#${String(issue.id).slice(-4)}`;
 
         document.getElementById('issue-modal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
