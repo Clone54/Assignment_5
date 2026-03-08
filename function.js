@@ -232,12 +232,19 @@ async function showIssueDetail(id) {
 
         const tags = document.getElementById('modal-tags');
         tags.innerHTML = `
-            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[#FECACA] text-[#EF4444] text-[11px] font-bold rounded-md bg-[#FEECEC]">
-                <i class="fas fa-bug"></i> BUG
-            </span>
-            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[#FDE68A] text-[#D97706] text-[11px] font-bold rounded-md bg-[#FFF8DB]">
-                <i class="fas fa-hands-helping"></i> HELP WANTED
-            </span>
+            <div class="flex items-center gap-2">
+                ${(issue.labels || [])
+                    .filter(label => label && label.trim() !== '')
+                    .map(label => {
+                        const key = label.toLowerCase().trim();
+                        const style = labelStyles[key];
+
+                        return `
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 border rounded-full text-[11px] font-bold ${style.classes}">
+                                <i class="${style.icon}"></i> ${style.label}
+                            </span>
+                        `;
+                    }).join('')}
         `;
 
         document.getElementById('issue-modal').classList.remove('hidden');
